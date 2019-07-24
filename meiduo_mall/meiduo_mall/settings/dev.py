@@ -121,14 +121,15 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/1.11/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'zh-Hans'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Asia/Shanghai'
 
 USE_I18N = True
 
 USE_L10N = True
 
+# 开启django"时区"功能：保存到数据库中到关于日期到数据，会同一转化成UTC（0时区）时间
 USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
