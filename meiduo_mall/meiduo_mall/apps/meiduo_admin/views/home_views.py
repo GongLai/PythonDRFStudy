@@ -1,8 +1,11 @@
 from rest_framework.viewsets import ViewSet
+from rest_framework.response import Response
 from django.utils import timezone
 from django.http import JsonResponse
 from rest_framework.decorators import action
 from rest_framework.permissions import IsAdminUser
+import pytz
+from django.conf import settings
 
 from users.models import User
 
@@ -23,8 +26,27 @@ class HomeView(ViewSet):
         # 获取当前日期
         date = timezone.now().date()
 
-        return JsonResponse({
+        return Response({
             'count': count,
             'date': date
         })
 
+    @action(methods=['get'], detail=False)
+    def day_increment(self, request):
+        """
+        获取日增用户
+        :param request:
+        :return:
+        """
+        # 1.获取当日的零时
+        dete_0_shanghai = timezone.now().astimezone(pytz.timezone(settings.TIME_ZONE)).replace(hour=0, minute=0,
+                                                                                               second=0)
+
+        # 2.根据零时，过滤用户
+        count = User.objects.filter(date_joined__gte=dete_0_shanghai).count()
+
+        # 3.构建响应数据
+        return Response({
+            'count': count,
+            'date': dete_0_shanghai.date()
+        })
