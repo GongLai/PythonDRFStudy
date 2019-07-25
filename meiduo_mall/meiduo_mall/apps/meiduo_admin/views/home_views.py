@@ -8,7 +8,8 @@ from django.conf import settings
 from datetime import timedelta
 
 from users.models import User
-from orders.models import OrderInfo
+from meiduo_admin.serializer.home_serializer import GoodsDaySerializer
+from goods.models import GoodsVisitCount
 
 
 class HomeView(ViewSet):
@@ -111,3 +112,16 @@ class HomeView(ViewSet):
 
         return Response(date_list)
 
+    @action(methods=['get'], detail=False)
+    def goods_day_views(self, request):
+        """日分类商品访问量统计"""
+        # 1.获得序列化数据GoodsVisitCount
+        date_0_shanghai = timezone.now().astimezone(pytz.timezone(settings.TIME_ZONE)).replace(hour=0, minute=0,
+                                                                                               second=0)
+        gv = GoodsVisitCount.objects.filter(create_time__gte=date_0_shanghai)
+
+        # 2.调用序列化器完成序列化数据
+        gvs = GoodsDaySerializer(gv, many=True)
+
+        # 3.构建响应对象
+        return Response(gvs.data)
