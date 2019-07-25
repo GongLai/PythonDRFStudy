@@ -1,13 +1,14 @@
 from rest_framework.viewsets import ViewSet
 from rest_framework.response import Response
 from django.utils import timezone
-from django.http import JsonResponse
 from rest_framework.decorators import action
 from rest_framework.permissions import IsAdminUser
 import pytz
 from django.conf import settings
+from datetime import timedelta
 
 from users.models import User
+from orders.models import OrderInfo
 
 
 class HomeView(ViewSet):
@@ -39,14 +40,16 @@ class HomeView(ViewSet):
         :return:
         """
         # 1.获取当日的零时
-        dete_0_shanghai = timezone.now().astimezone(pytz.timezone(settings.TIME_ZONE)).replace(hour=0, minute=0,
+        date_0_shanghai = timezone.now().astimezone(pytz.timezone(settings.TIME_ZONE)).replace(hour=0, minute=0,
                                                                                                second=0)
 
         # 2.根据零时，过滤用户
-        count = User.objects.filter(date_joined__gte=dete_0_shanghai).count()
+        count = User.objects.filter(date_joined__gte=date_0_shanghai).count()
 
         # 3.构建响应数据
         return Response({
             'count': count,
-            'date': dete_0_shanghai.date()
+            'date': date_0_shanghai.date()
         })
+
+
