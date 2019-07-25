@@ -52,7 +52,6 @@ class HomeView(ViewSet):
             'date': date_0_shanghai.date()
         })
 
-<<<<<<< HEAD
     @action(methods=['get'], detail=False)
     def day_active(self, request):
         """日活跃用户"""
@@ -69,6 +68,19 @@ class HomeView(ViewSet):
             'count': count,
             'date': date_0_shanghai.date()
         })
-=======
 
->>>>>>> 19d7cb65c284fab058029fa332062a28555faef0
+    @action(methods=['get'], detail=False)
+    def day_orders(self, request):
+        """日下单用户"""
+        # 1.获取当日零时
+        date_0_shanghai = timezone.now().astimezone(pytz.timezone(settings.TIME_ZONE)).replace(hour=0, minute=0,
+                                                                                               second=0)
+        # 2.根据零时，过滤用户
+        user_qs = User.objects.filter(orders__create_time__gte=date_0_shanghai)
+        count = len(set(user_qs))
+        # 3.构建响应数据
+        return Response({
+            'count': count,
+            'date': date_0_shanghai.date()
+        })
+
