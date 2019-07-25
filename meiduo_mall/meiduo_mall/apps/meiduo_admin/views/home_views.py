@@ -84,3 +84,30 @@ class HomeView(ViewSet):
             'date': date_0_shanghai.date()
         })
 
+    @action(methods=['get'], detail=False)
+    def month_increment(self, request):
+        """月增用户"""
+        # 1.获取当日零时
+        date_0_shanghai = timezone.now().astimezone(pytz.timezone(settings.TIME_ZONE)).replace(hour=0, minute=0,
+                                                                                               second=0)
+        # 2.获得当日日期
+        cur_date = timezone.now().astimezone(pytz.timezone(settings.TIME_ZONE))
+        start_date = cur_date - timedelta(days=29)
+
+        date_list = []
+        for index in range(30):
+            # 每遍历一次，获得一个当日的日期
+            # index = 0
+            clac_date = (start_date + timedelta(days=index)).replace(hour=0, minute=0, second=0)
+
+            # 过滤用户
+            count = User.objects.filter(date_joined__gte=clac_date,
+                                        date_joined__lt=clac_date + timedelta(days=1)).count()
+
+            date_list.append({
+                "count": count,
+                "date": clac_date.date()
+            })
+
+        return Response(date_list)
+
