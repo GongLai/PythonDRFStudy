@@ -50,3 +50,20 @@ class HomeView(ViewSet):
             'count': count,
             'date': dete_0_shanghai.date()
         })
+
+    @action(methods=['get'], detail=False)
+    def day_active(self, request):
+        """日活跃用户"""
+        # 1.获取当日零时
+        date_0_shanghai = timezone.now().astimezone(pytz.timezone(settings.TIME_ZONE)).replace(hour=0, minute=0,
+                                                                                               second=0)
+        # print(date_0_shanghai)
+        # 2.根据零时，过滤用户
+        count = User.objects.filter(last_login__gte=date_0_shanghai).count()
+        # print(count)
+
+        # 3.构建响应数据
+        return Response({
+            'count': count,
+            'date': date_0_shanghai.date()
+        })
