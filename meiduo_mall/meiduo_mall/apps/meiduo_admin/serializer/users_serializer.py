@@ -3,8 +3,8 @@ from rest_framework import serializers
 from users.models import User
 
 
-class UserSerializer(serializers.Serializer):
-    class Meta():
+class UserSerializer(serializers.ModelSerializer):
+    class Meta:
         model = User
         fields = [
             'id',
@@ -20,9 +20,8 @@ class UserSerializer(serializers.Serializer):
             }
         }
 
+    # 重写create方法
     def create(self, validated_data):
-        # validated_data['password'] = make_password(validated_data['password'])
-        # validated_data['is_staff'] = True
-        # return super().create(validated_data)
+
 
         return self.Meta.model.objects.create_superuser(**validated_data)
