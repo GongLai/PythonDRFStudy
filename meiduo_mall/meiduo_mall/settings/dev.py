@@ -249,20 +249,20 @@ EMAIL_FROM = '美多商城<itcast99@163.com>'  # 发件人抬头
 # 邮箱验证链接
 EMAIL_VERIFY_URL = 'http://www.meiduo.site:8000/emails/verification/'
 
-# MEDIA_URL = 'http://192.168.88.129:8888/'
+# MEDIA_URL = 'http://192.168.186.130:8888/'
 
 # 指定自定义的Django文件存储类
 DEFAULT_FILE_STORAGE = 'meiduo_mall.utils.fastdfs.fdfs_storage.FastDFSStorage'
 
 # FastDFS相关参数
-# FDFS_BASE_URL = 'http://192.168.88.129:8888/'
+# FDFS_BASE_URL = 'http://192.168.186.130:8888/'
 FDFS_BASE_URL = 'http://image.meiduo.site:8888/'
 
 # Haystack
 HAYSTACK_CONNECTIONS = {
     'default': {
         'ENGINE': 'haystack.backends.elasticsearch_backend.ElasticsearchSearchEngine',
-        'URL': 'http://192.168.88.129:9200/',  # Elasticsearch服务器ip地址，端口号固定为9200
+        'URL': 'http://192.168.186.130:9200/',  # Elasticsearch服务器ip地址，端口号固定为9200
         'INDEX_NAME': 'meiduo',  # Elasticsearch建立的索引库的名称
     },
 }

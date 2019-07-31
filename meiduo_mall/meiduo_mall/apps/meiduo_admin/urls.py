@@ -10,8 +10,16 @@ urlpatterns = [
     url(r'^authorizations/$', obtain_jwt_token),
     # 用户管理
     url(r'^users/$', UserView.as_view()),
+    # 展示sku表信息
+    url(r'^skus/$', SKUViewSet.as_view({"get": "list", "post": "create"})),
+    # 获得spu信息
+    url(r'^goods/simple/$', SKUViewSet.as_view({"get": "simple"})),
+    # 获得可选的spu规格及选项
+    url(r'^goods/(?P<pk>\d+)/specs/$', SKUViewSet.as_view({"get": "specs"})),
 
-    url(r'^skus/$', SKUViewSet.as_view({"get": "list"})),
+    # 三级分类信息
+    url(r'^skus/categories/$', SKUViewSet.as_view({"get": "categories"})),
+
 
 ]
 
