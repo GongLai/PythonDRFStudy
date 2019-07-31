@@ -5,6 +5,7 @@ from rest_framework.routers import SimpleRouter
 from .views.home_views import HomeView
 from .views.users_views import UserView
 from .views.sku_views import SKUViewSet
+from .views.spu_views import SPUViewSet
 
 urlpatterns = [
     url(r'^authorizations/$', obtain_jwt_token),
@@ -24,6 +25,10 @@ urlpatterns = [
 
     # 三级分类信息
     url(r'^skus/categories/$', SKUViewSet.as_view({"get": "categories"})),
+
+
+    url(r'^goods/$', SPUViewSet.as_view({"get": "list"})),
+
 
 ]
 
