@@ -12,6 +12,11 @@ urlpatterns = [
     url(r'^users/$', UserView.as_view()),
     # 展示sku表信息
     url(r'^skus/$', SKUViewSet.as_view({"get": "list", "post": "create"})),
+    # 修改/删除sku表信息
+    url(r'^skus/(?P<pk>\d+)/$', SKUViewSet.as_view({"get": "retrieve",
+                                                    "put": "update",
+                                                    "delete": "destroy"})),
+
     # 获得spu信息
     url(r'^goods/simple/$', SKUViewSet.as_view({"get": "simple"})),
     # 获得可选的spu规格及选项
@@ -20,10 +25,12 @@ urlpatterns = [
     # 三级分类信息
     url(r'^skus/categories/$', SKUViewSet.as_view({"get": "categories"})),
 
-
 ]
 
 router = SimpleRouter()
-router.register(prefix='statistical', viewset=HomeView, base_name='statistical')
+router.register(
+    prefix='statistical',
+    viewset=HomeView,
+    base_name='statistical')
 
 urlpatterns += router.urls
