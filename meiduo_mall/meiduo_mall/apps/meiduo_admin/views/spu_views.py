@@ -18,12 +18,6 @@ class GoodsBrandsViewSet(ListAPIView):
     serializer_class = GoodsBrandsSerializer
 
 
-class BrandViewSet(ListAPIView):
-
-    queryset = Brand.objects.all()
-    serializer_class = BrandSerializer
-
-
 class GoodsCategorySerializer(ListAPIView):
     queryset = GoodsCategory.objects.all()
     serializer_class = GoodsCategorySerializer

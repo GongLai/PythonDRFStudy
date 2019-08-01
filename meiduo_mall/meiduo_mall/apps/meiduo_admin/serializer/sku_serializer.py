@@ -1,6 +1,6 @@
 from rest_framework import serializers
 
-from goods.models import SKU, SKUSpecification, GoodsCategory, SPU, SPUSpecification, SpecificationOption
+from goods.models import *
 
 
 class SKUSpecsSerializer(serializers.ModelSerializer):
