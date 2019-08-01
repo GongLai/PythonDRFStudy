@@ -33,3 +33,15 @@ class GoodsCategorySerializer(ListAPIView):
             # 如果pk为None，说明要的是一级信息
             return self.queryset.filter(parent_id=None)
 
+
+class SpecsViewSet(ModelViewSet):
+    queryset = SPUSpecification.objects.all()
+    serializer_class = SPUSpecificationSerializer
+    pagination_class = MyPage
+
+    def get_queryset(self):
+        keyword = self.request.query_params.get("keyword")
+        if keyword:
+            return self.queryset.filter(name__contains=keyword)
+        return self.queryset.all()
+

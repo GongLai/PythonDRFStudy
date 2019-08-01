@@ -95,7 +95,7 @@ class Brand(BaseModel):
         return self.name
 
 
-class   SPU(BaseModel):
+class SPU(BaseModel):
     """商品SPU"""
     name = models.CharField(max_length=50, verbose_name='名称')
     brand = models.ForeignKey(Brand, on_delete=models.PROTECT, verbose_name='品牌')
