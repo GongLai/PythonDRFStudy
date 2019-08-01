@@ -27,7 +27,7 @@ urlpatterns = [
     url(r'^skus/categories/$', SKUViewSet.as_view({"get": "categories"})),
 
 
-    url(r'^goods/$', SPUViewSet.as_view({"get": "list"})),
+    url(r'^goods/$', SPUViewSet.as_view({"get": "list", "post": "create"})),
     # 展示spu所属的品牌信息
     url(r'^goods/brands/simple/$', BrandViewSet.as_view()),
     # spu表展示一级分类
