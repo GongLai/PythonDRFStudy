@@ -5,7 +5,11 @@ from rest_framework.routers import SimpleRouter
 from .views.home_views import HomeView
 from .views.users_views import UserView
 from .views.sku_views import SKUViewSet
+<<<<<<< HEAD
 from .views.spu_views import SPUViewSet, GoodsBrandsViewSet
+=======
+from .views.spu_views import *
+>>>>>>> dev
 
 urlpatterns = [
     url(r'^authorizations/$', obtain_jwt_token),
@@ -31,7 +35,17 @@ urlpatterns = [
     url(r'^skus/categories/$', SKUViewSet.as_view({"get": "categories"})),
 
 
+<<<<<<< HEAD
 
+=======
+    url(r'^goods/$', SPUViewSet.as_view({"get": "list", "post": "create"})),
+    # 展示spu所属的品牌信息
+    url(r'^goods/brands/simple/$', BrandViewSet.as_view()),
+    # spu表展示一级分类
+    url(r'^goods/channel/categories/$', GoodsCategorySerializer.as_view()),
+    # spu表展示下级分类
+    url(r'^goods/channel/categories/(?P<pk>\d+)/$', GoodsCategorySerializer.as_view()),
+>>>>>>> dev
 
 
 ]
