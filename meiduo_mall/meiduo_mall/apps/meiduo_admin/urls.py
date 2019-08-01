@@ -6,6 +6,7 @@ from meiduo_admin.views.home_views import HomeView
 from meiduo_admin.views.users_views import UserView
 from meiduo_admin.views.sku_views import SKUViewSet
 from meiduo_admin.views.spu_views import *
+from meiduo_admin.views.options_views import *
 
 urlpatterns = [
     url(r'^authorizations/$', obtain_jwt_token),
@@ -38,8 +39,16 @@ urlpatterns = [
     url(r'^goods/(?P<pk>\d+)/$', SPUViewSet.as_view({"get": "retrieve", "put": "update", "delete": "destroy"})),
     # 查看/新增商品规格信息
     url(r'^goods/specs/$', SpecsViewSet.as_view({'get': 'list', 'post': 'create'})),
-    # 修改/删除商品规格信息
+    # 展示/修改/删除单一商品规格信息
     url(r'^goods/specs/(?P<pk>\d+)/$', SpecsViewSet.as_view({"get": "retrieve", "put": "update", "delete": "destroy"})),
+    # 展示/新增规格选项信息
+    url(r'^specs/options/$', SpecsOptionsViewSet.as_view({'get': 'list', 'post': 'create'})),
+    # 展示/修改/删除单一规格选项信息
+    url(r'^specs/options/(?P<pk>\d+)/$',
+        SpecsOptionsViewSet.as_view({'get': 'retrieve', "put": "update", "delete": "destroy"})),
+    # 展示规格选项
+    url(r'^goods/specs/simple/$', OptionSimpleViewSet.as_view()),
+
 ]
 
 router = SimpleRouter()
