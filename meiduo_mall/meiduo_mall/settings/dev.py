@@ -95,7 +95,7 @@ DATABASES = {
         'HOST': '119.3.164.201',  # 数据库主机
         'PORT': 3306,  # 数据库端口
         'USER': 'King',  # 数据库用户名
-        'PASSWORD': 'Meiduo@123456',  # 数据库用户密码
+            'PASSWORD': 'Meiduo@123456',  # 数据库用户密码
         'NAME': 'meiduo_mall_db'  # 数据库名字
     }
 }

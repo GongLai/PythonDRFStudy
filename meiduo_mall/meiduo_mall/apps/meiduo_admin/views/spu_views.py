@@ -1,7 +1,8 @@
 from rest_framework.viewsets import ModelViewSet
+from rest_framework.generics import ListAPIView
 
 from goods.models import SPU
-from meiduo_admin.serializer.spu_serializer import SPUSerializer
+from meiduo_admin.serializer.spu_serializer import *
 from meiduo_admin.pages import MyPage
 
 
@@ -12,3 +13,7 @@ class SPUViewSet(ModelViewSet):
     pagination_class = MyPage
 
 
+class GoodsBrandsViewSet(ListAPIView):
+
+    queryset = Brand.objects.all()
+    serializer_class = GoodsBrandsSerializer
