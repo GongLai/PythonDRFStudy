@@ -10,10 +10,13 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/1.11/ref/settings/
 """
 
-import os, sys, datetime
+import os
+import sys
+import datetime
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))  # 项目导报路径
+BASE_DIR = os.path.dirname(os.path.dirname(
+    os.path.abspath(__file__)))  # 项目导报路径
 sys.path.insert(0, os.path.join(BASE_DIR, 'apps'))  # 追加apps也为项目导包路径
 
 # Quick-start development settings - unsuitable for production
@@ -95,8 +98,17 @@ DATABASES = {
         'HOST': '119.3.164.201',  # 数据库主机
         'PORT': 3306,  # 数据库端口
         'USER': 'King',  # 数据库用户名
-            'PASSWORD': 'Meiduo@123456',  # 数据库用户密码
+        'PASSWORD': 'Meiduo@123456',  # 数据库用户密码
         'NAME': 'meiduo_mall_db'  # 数据库名字
+
+
+        # 'default': {
+        #     'ENGINE': 'django.db.backends.mysql',  # 数据库引擎
+        #     'HOST': '127.0.0.1',  # 数据库主机
+        #     'PORT': 3306,  # 数据库端口
+        #     'USER': 'King',  # 数据库用户名
+        #     'PASSWORD': '123456',  # 数据库用户密码
+        #     'NAME': 'meiduo_mall_db'  # 数据库名字
     }
 }
 
@@ -209,7 +221,8 @@ LOGGING = {
         'file': {  # 向文件中输出日志
             'level': 'INFO',
             'class': 'logging.handlers.RotatingFileHandler',  # 保存到文件，自动切
-            'filename': os.path.join(os.path.dirname(BASE_DIR), 'logs/meiduo.log'),  # 日志文件的位置
+            # 日志文件的位置
+            'filename': os.path.join(os.path.dirname(BASE_DIR), 'logs/meiduo.log'),
             'maxBytes': 300 * 1024 * 1024,  # 日志大小 300M
             'backupCount': 10,
             'formatter': 'verbose'

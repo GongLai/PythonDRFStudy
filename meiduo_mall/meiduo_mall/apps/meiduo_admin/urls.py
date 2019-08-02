@@ -7,6 +7,7 @@ from meiduo_admin.views.users_views import UserView
 from meiduo_admin.views.sku_views import SKUViewSet
 from meiduo_admin.views.spu_views import *
 from meiduo_admin.views.options_views import *
+from meiduo_admin.views.channels_views import *
 
 urlpatterns = [
     url(r'^authorizations/$', obtain_jwt_token),
@@ -15,7 +16,10 @@ urlpatterns = [
     # 展示sku表信息
     url(r'^skus/$', SKUViewSet.as_view({"get": "list", "post": "create"})),
     # 修改/删除sku表信息
-    url(r'^skus/(?P<pk>\d+)/$', SKUViewSet.as_view({"get": "retrieve", "put": "update", "delete": "destroy"})),
+    url(r'^skus/(?P<pk>\d+)/$',
+        SKUViewSet.as_view({"get": "retrieve",
+                            "put": "update",
+                            "delete": "destroy"})),
 
     url(r'^goods/$', SPUViewSet.as_view({"get": "list", "post": "create"})),
     # 获得spu信息
@@ -36,18 +40,41 @@ urlpatterns = [
     url(r'^goods/channel/categories/(?P<pk>\d+)/$',
         GoodsCategorySerializer.as_view()),
     # 修改spu表信息
-    url(r'^goods/(?P<pk>\d+)/$', SPUViewSet.as_view({"get": "retrieve", "put": "update", "delete": "destroy"})),
+    url(r'^goods/(?P<pk>\d+)/$',
+        SPUViewSet.as_view({"get": "retrieve",
+                            "put": "update",
+                            "delete": "destroy"})),
+
     # 查看/新增商品规格信息
-    url(r'^goods/specs/$', SpecsViewSet.as_view({'get': 'list', 'post': 'create'})),
+    url(r'^goods/specs/$',
+        SpecsViewSet.as_view({'get': 'list', 'post': 'create'})),
     # 展示/修改/删除单一商品规格信息
-    url(r'^goods/specs/(?P<pk>\d+)/$', SpecsViewSet.as_view({"get": "retrieve", "put": "update", "delete": "destroy"})),
+    url(r'^goods/specs/(?P<pk>\d+)/$',
+        SpecsViewSet.as_view({"get": "retrieve",
+                              "put": "update",
+                              "delete": "destroy"})),
     # 展示/新增规格选项信息
-    url(r'^specs/options/$', SpecsOptionsViewSet.as_view({'get': 'list', 'post': 'create'})),
+    url(r'^specs/options/$',
+        SpecsOptionsViewSet.as_view({'get': 'list', 'post': 'create'})),
     # 展示/修改/删除单一规格选项信息
     url(r'^specs/options/(?P<pk>\d+)/$',
         SpecsOptionsViewSet.as_view({'get': 'retrieve', "put": "update", "delete": "destroy"})),
     # 展示规格选项
     url(r'^goods/specs/simple/$', OptionSimpleViewSet.as_view()),
+
+    # 展示频道管理数据
+    url(r'^goods/channels/$',
+        ChannelViewSet.as_view({'get': 'list', 'post': 'create'})),
+    # 展示修改/删除单一商品频道管理数据
+    url(r'^goods/channels/(?P<pk>\d+)/$',
+        ChannelViewSet.as_view({'get': 'retrieve',
+                                'put': 'update',
+                                'delete': 'destroy'})),
+    # 展现商品频道组信息
+    url(r'^goods/channel_types/$', ChannelGroupView.as_view()),
+    # 展示商品频道组一级分类信息
+    url(r'^goods/categories/$', GoodsCategorySerializer.as_view()),
+
 
 ]
 
