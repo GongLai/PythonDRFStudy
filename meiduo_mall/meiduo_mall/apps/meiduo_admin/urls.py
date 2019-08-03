@@ -8,6 +8,7 @@ from meiduo_admin.views.sku_views import SKUViewSet
 from meiduo_admin.views.spu_views import *
 from meiduo_admin.views.options_views import *
 from meiduo_admin.views.channels_views import *
+from meiduo_admin.views.brand_views import *
 
 urlpatterns = [
     url(r'^authorizations/$', obtain_jwt_token),
@@ -75,8 +76,13 @@ urlpatterns = [
     # 展示商品频道组一级分类信息
     url(r'^goods/categories/$', GoodsCategorySerializer.as_view()),
 
-
+    # 展示/新增品牌管理数据
+    url(r'^goods/brands/$', BrandViewSet.as_view({'get': 'list', 'post': 'create'})),
+    # 展示/修改/删除单一品牌管理数据
+    url(r'^goods/brands/(?P<pk>\d+)/$', BrandViewSet.as_view({'get': 'retrieve', "put": "update", "delete": "destroy"})),
 ]
+
+
 
 router = SimpleRouter()
 router.register(

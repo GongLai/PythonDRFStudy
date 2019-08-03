@@ -101,7 +101,6 @@ DATABASES = {
         'PASSWORD': 'Meiduo@123456',  # 数据库用户密码
         'NAME': 'meiduo_mall_db'  # 数据库名字
 
-
         # 'default': {
         #     'ENGINE': 'django.db.backends.mysql',  # 数据库引擎
         #     'HOST': '127.0.0.1',  # 数据库主机
@@ -311,3 +310,7 @@ JWT_AUTH = {
     'JWT_RESPONSE_PAYLOAD_HANDLER': 'meiduo_admin.utils.jwt_response.jwt_response_payload_handler',
 
 }
+
+FDFS_CONFPATH = os.path.join(BASE_DIR, 'utils/fastdfs/client.conf')
+
+
