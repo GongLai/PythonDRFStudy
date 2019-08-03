@@ -105,7 +105,8 @@ urlpatterns = [
     # 系统管理
     # 权限管理--展示可选权限类型
     url(r'^permission/content_types/$', ContentTypeViewSet.as_view()),
-
+    # 用户组管理--获取可选权限表数据
+    url(r'^permission/simple/$', GroupPermView.as_view()),
 
 ]
 
@@ -114,11 +115,20 @@ router.register(
     prefix='statistical',
     viewset=HomeView,
     base_name='statistical')
-# 权限管理--展示/添加/修改/删除权限管理列表
+
+# 权限管理--获取/添加/修改/删除权限管理列表
 router.register(
     prefix='permission/perms',
     viewset=PermViewSet,
-    base_name='permission'
+    base_name='perm'
 )
+
+# 用户组管理--获取/添加/修改/删除用户组管理列表
+router.register(
+    prefix='permission/groups',
+    viewset=GroupViewSet,
+    base_name='group'
+)
+
 
 urlpatterns += router.urls

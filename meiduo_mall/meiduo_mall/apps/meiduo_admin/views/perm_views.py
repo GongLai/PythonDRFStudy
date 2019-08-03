@@ -14,3 +14,14 @@ class PermViewSet(ModelViewSet):
 class ContentTypeViewSet(ListAPIView):
     queryset = ContentType.objects.all()
     serializer_class = ContentTypeSerializer
+
+
+class GroupViewSet(ModelViewSet):
+    queryset = Group.objects.all()
+    serializer_class = GroupSerializer
+    pagination_class = MyPage
+
+
+class GroupPermView(ListAPIView):
+    queryset = Permission.objects.all()
+    serializer_class = PermSerializer
