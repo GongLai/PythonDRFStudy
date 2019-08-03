@@ -10,6 +10,7 @@ from meiduo_admin.views.options_views import *
 from meiduo_admin.views.channels_views import *
 from meiduo_admin.views.brand_views import *
 from meiduo_admin.views.images_views import *
+from meiduo_admin.views.order_views import *
 
 urlpatterns = [
     url(r'^authorizations/$', obtain_jwt_token),
@@ -92,6 +93,13 @@ urlpatterns = [
     # 展示图片管理SKU商品id
     url(r'^skus/simple/$', SimpleView.as_view()),
 
+    # 订单管理
+    # 获得订单多条数据
+    url(r'^orders/$', OrderViewSet.as_view()),
+    # 获得订单详情数据
+    url(r'^orders/(?P<pk>\d+)/$', OrderInfoDetailView.as_view()),
+    # 修改订单详情订单状态
+    url(r'^orders/(?P<pk>\d+)/status/$', OrderInfoDetailView.as_view()),
 
 ]
 
