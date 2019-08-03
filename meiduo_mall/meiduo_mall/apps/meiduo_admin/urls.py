@@ -9,6 +9,7 @@ from meiduo_admin.views.spu_views import *
 from meiduo_admin.views.options_views import *
 from meiduo_admin.views.channels_views import *
 from meiduo_admin.views.brand_views import *
+from meiduo_admin.views.images_views import *
 
 urlpatterns = [
     url(r'^authorizations/$', obtain_jwt_token),
@@ -76,13 +77,23 @@ urlpatterns = [
     # 展示商品频道组一级分类信息
     url(r'^goods/categories/$', GoodsCategorySerializer.as_view()),
 
+    # 品牌管理
     # 展示/新增品牌管理数据
     url(r'^goods/brands/$', BrandViewSet.as_view({'get': 'list', 'post': 'create'})),
     # 展示/修改/删除单一品牌管理数据
-    url(r'^goods/brands/(?P<pk>\d+)/$', BrandViewSet.as_view({'get': 'retrieve', "put": "update", "delete": "destroy"})),
+    url(r'^goods/brands/(?P<pk>\d+)/$',
+        BrandViewSet.as_view({'get': 'retrieve', "put": "update", "delete": "destroy"})),
+
+    # 图片管理
+    # 展示/新增图片管理数据
+    url(r'^skus/images/$', ImageViewSet.as_view({'get': 'list', 'post': 'create'})),
+    # 展示/修改/删除单一图片管理数据
+    url(r'^skus/images/(?P<pk>\d+)/$', ImageViewSet.as_view({'get': 'retrieve', "put": "update", "delete": "destroy"})),
+    # 展示图片管理SKU商品id
+    url(r'^skus/simple/$', SimpleView.as_view()),
+
+
 ]
-
-
 
 router = SimpleRouter()
 router.register(
