@@ -12,6 +12,7 @@ from meiduo_admin.views.brand_views import *
 from meiduo_admin.views.images_views import *
 from meiduo_admin.views.order_views import *
 from meiduo_admin.views.perm_views import *
+from meiduo_admin.views.admin_views import *
 
 urlpatterns = [
     url(r'^authorizations/$', obtain_jwt_token),
@@ -107,6 +108,8 @@ urlpatterns = [
     url(r'^permission/content_types/$', ContentTypeViewSet.as_view()),
     # 用户组管理--获取可选权限表数据
     url(r'^permission/simple/$', GroupPermView.as_view()),
+    # 管理员管理--获取新建管理员用户组数据
+    url(r'^permission/groups/simple/$', GroupSimpleView.as_view()),
 
 ]
 
@@ -130,5 +133,11 @@ router.register(
     base_name='group'
 )
 
+# 管理员管理
+router.register(
+    prefix='permission/admins',
+    viewset=AdminViewSet,
+    base_name='admin'
+)
 
 urlpatterns += router.urls
