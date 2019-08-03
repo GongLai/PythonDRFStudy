@@ -11,6 +11,7 @@ from meiduo_admin.views.channels_views import *
 from meiduo_admin.views.brand_views import *
 from meiduo_admin.views.images_views import *
 from meiduo_admin.views.order_views import *
+from meiduo_admin.views.perm_views import *
 
 urlpatterns = [
     url(r'^authorizations/$', obtain_jwt_token),
@@ -101,6 +102,11 @@ urlpatterns = [
     # 修改订单详情订单状态
     url(r'^orders/(?P<pk>\d+)/status/$', OrderInfoDetailView.as_view()),
 
+    # 系统管理
+    # 权限管理--展示可选权限类型
+    url(r'^permission/content_types/$', ContentTypeViewSet.as_view()),
+
+
 ]
 
 router = SimpleRouter()
@@ -108,5 +114,11 @@ router.register(
     prefix='statistical',
     viewset=HomeView,
     base_name='statistical')
+# 权限管理--展示/添加/修改/删除权限管理列表
+router.register(
+    prefix='permission/perms',
+    viewset=PermViewSet,
+    base_name='permission'
+)
 
 urlpatterns += router.urls
